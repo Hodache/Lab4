@@ -20,9 +20,99 @@ namespace Lab4
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<Drink> drinksList = new List<Drink>();
+
+        // Параграфы для работы с RichTextBox
+        Paragraph infoParagraph = new Paragraph();
+        Paragraph outParagraph = new Paragraph();
+
         public MainWindow()
         {
             InitializeComponent();
+
+            txtOut.Document.Blocks.Clear();
+            ShowInfo();
+        }
+
+        private void btnRefill_Click(object sender, RoutedEventArgs e)
+        {
+            drinksList.Clear();
+
+            var rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                switch (rnd.Next() % 3) // генерирую случайное число от 0 до 2
+                {
+                    case 0: // если 0, то сок
+                        drinksList.Add(Juice.Generate());
+                        break;
+                    case 1: // если 1 то газировка
+                        drinksList.Add(Soda.Generate());
+                        break;
+                    case 2: // если 2 то алкоголь
+                        drinksList.Add(Alcohol.Generate());
+                        break;
+                }
+            }
+            ShowInfo();
+        }
+
+        private void ShowInfo()
+        {
+            int juiceCount = 0;
+            int sodaCount = 0;
+            int alcoholCount = 0;
+
+            foreach (var drink in this.drinksList)
+            {
+                if (drink is Juice)
+                {
+                    juiceCount++;
+                }
+                else if (drink is Soda)
+                {
+                    sodaCount++;
+                }
+                else if (drink is Alcohol)
+                {
+                    alcoholCount++;
+                }
+            }
+
+            string counts = String.Format("{0}\t{1}\t\t{2}", juiceCount, sodaCount, alcoholCount);
+
+            // Очищаем текст
+            txtInfo.Document.Blocks.Clear();
+            infoParagraph.Inlines.Clear();
+
+            // Заполняем параграф новой информацией
+            infoParagraph.Inlines.Add(new Bold(new Run("Сок\tГазировка\tАлкоголь\n")));
+            infoParagraph.Inlines.Add(new Run(counts));
+            // Выводим параграфы в поле
+            txtInfo.Document.Blocks.Add(infoParagraph);
+        }
+
+        private void btnGet_Click(object sender, RoutedEventArgs e)
+        {
+            outParagraph.Inlines.Clear();
+
+            if (drinksList.Count == 0) // Если список пуст
+            {
+                outParagraph.Inlines.Add(new Run("Автомат пуст"));
+                txtOut.Document.Blocks.Add(outParagraph);
+            }
+            else
+            {
+                // Берем первый элемент и удаляем его
+                Drink drink = drinksList[0];
+                drinksList.RemoveAt(0);
+
+                // Выводим информацию в поле
+                outParagraph.Inlines.Add(new Run(drink.GetInfo()));
+                txtOut.Document.Blocks.Add(outParagraph);
+                
+                ShowInfo();
+            }
         }
     }
 }

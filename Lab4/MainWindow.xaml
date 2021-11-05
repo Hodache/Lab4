@@ -5,25 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab4"
         mc:Ignorable="d"
-        Title="Автомат с напитками" Height="450" Width="800" ResizeMode="NoResize">
-    <Grid>
+        Title="Автомат с напитками" Height="274" Width="280" ResizeMode="NoResize">
+    <Grid Width="280" Height="250">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <RichTextBox Margin="10,304,570,10" Width="220" Height="120">
+        <RichTextBox x:Name="txtOut" Margin="10,110,111,20" FontSize="14" Width="160" Height="120">
             <FlowDocument>
                 <Paragraph>
                     <Run Text="RichTextBox"/>
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
-        <RichTextBox Margin="10,239,570,135" Width="220" Height="60" IsReadOnly="True">
+        <RichTextBox x:Name="txtInfo" Margin="10,45,21,145" IsReadOnly="True" FontSize="14" Width="250" Height="60" BorderThickness="0">
             <FlowDocument>
                 <Paragraph>
                     <Run Text="RichTextBox"/>
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
+        <Button x:Name="btnGet" Content="Взять" HorizontalAlignment="Left" Margin="175,110,0,0" VerticalAlignment="Top" Height="120" Width="85" FontSize="14" Click="btnGet_Click"/>
+        <Button x:Name="btnRefill" Content="Перезаполнить" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="30" Width="250" FontSize="14" Click="btnRefill_Click"/>
 
     </Grid>
 </Window>
