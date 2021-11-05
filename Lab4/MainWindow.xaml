@@ -5,27 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab4"
         mc:Ignorable="d"
-        Title="Автомат с напитками" Height="274" Width="280" ResizeMode="NoResize">
-    <Grid Width="280" Height="250">
+        Title="Автомат с напитками" Height="274" Width="440" ResizeMode="NoResize">
+    <Grid Margin="0,0,0,-2">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <RichTextBox x:Name="txtOut" Margin="10,110,111,20" FontSize="14" Width="160" Height="120">
+        <RichTextBox x:Name="txtOut" Margin="160,120,120,20" FontSize="14" Width="160" Height="120" IsReadOnly="true">
             <FlowDocument>
                 <Paragraph>
                     <Run Text="RichTextBox"/>
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
-        <RichTextBox x:Name="txtInfo" Margin="10,45,21,145" IsReadOnly="True" FontSize="14" Width="250" Height="60" BorderThickness="0">
+        <RichTextBox x:Name="txtInfo" Margin="160,55,30,145" IsReadOnly="True" FontSize="14" Width="250" Height="60" BorderThickness="0">
             <FlowDocument>
                 <Paragraph>
                     <Run Text="RichTextBox"/>
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
-        <Button x:Name="btnGet" Content="Взять" HorizontalAlignment="Left" Margin="175,110,0,0" VerticalAlignment="Top" Height="120" Width="85" FontSize="14" Click="btnGet_Click"/>
-        <Button x:Name="btnRefill" Content="Перезаполнить" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="30" Width="250" FontSize="14" Click="btnRefill_Click"/>
+        <Button x:Name="btnGet" Content="Взять" HorizontalAlignment="Left" Margin="325,120,0,0" VerticalAlignment="Top" Height="120" Width="85" FontSize="14" Click="btnGet_Click"/>
+        <Button x:Name="btnRefill" Content="Перезаполнить" HorizontalAlignment="Left" Margin="160,20,0,0" VerticalAlignment="Top" Height="30" Width="250" FontSize="14" Click="btnRefill_Click"/>
+        <RichTextBox x:Name="txtQueue" Margin="14,20,301,20" FontSize="14" IsReadOnly="true" Width="125" Height="220">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="RichTextBox"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
 
     </Grid>
 </Window>

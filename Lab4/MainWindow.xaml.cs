@@ -25,12 +25,14 @@ namespace Lab4
         // Параграфы для работы с RichTextBox
         Paragraph infoParagraph = new Paragraph();
         Paragraph outParagraph = new Paragraph();
+        Paragraph queueParagraph = new Paragraph();
 
         public MainWindow()
         {
             InitializeComponent();
 
             txtOut.Document.Blocks.Clear();
+            txtQueue.Document.Blocks.Clear();
             ShowInfo();
         }
 
@@ -55,6 +57,7 @@ namespace Lab4
                 }
             }
             ShowInfo();
+            ShowQueue();
         }
 
         private void ShowInfo()
@@ -112,7 +115,32 @@ namespace Lab4
                 txtOut.Document.Blocks.Add(outParagraph);
                 
                 ShowInfo();
+                ShowQueue();
             }
+        }
+
+        public void ShowQueue()
+        {
+            queueParagraph.Inlines.Clear();
+
+            if (drinksList.Count == 0) // Если список пуст
+            {
+                queueParagraph.Inlines.Add(new Run("Очередь пуста"));
+            }
+            else
+            {
+                foreach (var drink in drinksList)
+                {
+                    BitmapImage bitmap = new BitmapImage(new Uri(@"C:\Users\hodac\source\repos\Lab4\Lab4\" + drink.GetDrinkType() + ".jpg"));
+                    Image image = new Image();
+                    image.Source = bitmap;
+                    image.Height = 20;
+
+                    queueParagraph.Inlines.Add(image);
+                    queueParagraph.Inlines.Add(new Run(drink.GetDrinkType() + "\n"));
+                }
+            }
+            txtQueue.Document.Blocks.Add(queueParagraph);
         }
     }
 }

@@ -12,8 +12,13 @@ namespace Lab4
 
         public virtual string GetInfo()
         {
-            string info = String.Format("Объем: {0}\n", this.volume);
+            string info = String.Format("Объем: {0} мл.\n", this.volume);
             return info;
+        }
+
+        public virtual string GetDrinkType()
+        {
+            return "Напиток";
         }
     }
 
@@ -30,6 +35,11 @@ namespace Lab4
             info += base.GetInfo();
             info += String.Format("Вкус: {0}\nМякоть: {1}", this.type, this.withPulp);
             return info;
+        }
+
+        public override string GetDrinkType()
+        {
+            return "Сок";
         }
 
         public static Juice Generate()
@@ -59,6 +69,11 @@ namespace Lab4
             return info;
         }
 
+        public override string GetDrinkType()
+        {
+            return "Газировка";
+        }
+
         public static Soda Generate()
         {
             var rnd = new Random();
@@ -82,8 +97,13 @@ namespace Lab4
         {
             string info = "Алкоголь\n";
             info += base.GetInfo();
-            info += String.Format("Крепость: {0}\nТип: {1}", this.strength, this.type);
+            info += String.Format("Крепость: {0}%\nТип: {1}", this.strength, this.type);
             return info;
+        }
+
+        public override string GetDrinkType()
+        {
+            return "Алкоголь";
         }
 
         public static Alcohol Generate()
