@@ -33,7 +33,21 @@ namespace Lab4
         {
             string info = "Сок\n";
             info += base.GetInfo();
-            info += String.Format("Вкус: {0}\nМякоть: {1}", this.type, this.withPulp);
+
+            string ingridient = "";
+            switch (this.type) {
+                case JuiceType.apple:
+                    ingridient = "Яблоко";
+                    break;
+                case JuiceType.orange:
+                    ingridient = "Апельсин";
+                    break;
+                case JuiceType.cherry:
+                    ingridient = "Вишня";
+                    break;
+            }
+
+            info += String.Format("Вкус: {0}\nМякоть: {1}", ingridient, this.withPulp == true ? "Есть" : "Нет");
             return info;
         }
 
@@ -65,7 +79,22 @@ namespace Lab4
         {
             string info = "Газировка\n";
             info += base.GetInfo();
-            info += String.Format("Вид: {0}\nКоличество пузырьков: {1}", this.type, this.bubblesNumber);
+
+            string type = "";
+            switch (this.type)
+            {
+                case SodaType.coke:
+                    type = "Кока-кола";
+                    break;
+                case SodaType.fanta:
+                    type = "Фанта";
+                    break;
+                case SodaType.sprite:
+                    type = "Спрайт";
+                    break;
+            }
+
+            info += String.Format("Вид: {0}\nКоличество пузырьков: {1}", type, this.bubblesNumber);
             return info;
         }
 
@@ -97,7 +126,22 @@ namespace Lab4
         {
             string info = "Алкоголь\n";
             info += base.GetInfo();
-            info += String.Format("Крепость: {0}%\nТип: {1}", this.strength, this.type);
+
+            string type = "";
+            switch (this.type)
+            {
+                case AlcoholType.beer:
+                    type = "Пиво";
+                    break;
+                case AlcoholType.wine:
+                    type = "Вино";
+                    break;
+                case AlcoholType.cognac:
+                    type = "Коньяк";
+                    break;
+            }
+
+            info += String.Format("Крепость: {0}%\nТип: {1}", this.strength, type);
             return info;
         }
 
