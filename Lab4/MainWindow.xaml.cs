@@ -20,6 +20,7 @@ namespace Lab4
     /// </summary>
     public partial class MainWindow : Window
     {
+        // Список напитков
         List<Drink> drinksList = new List<Drink>();
 
         // Параграфы для работы с RichTextBox
@@ -31,15 +32,21 @@ namespace Lab4
         {
             InitializeComponent();
 
+            // Очистка полей на форме
             txtOut.Document.Blocks.Clear();
             txtQueue.Document.Blocks.Clear();
+
+            // Отображение начального состояния списка на форме
             ShowInfo();
+            ShowQueue();
         }
 
         private void btnRefill_Click(object sender, RoutedEventArgs e)
         {
+            // Удаление всех текущих элементов списка
             drinksList.Clear();
 
+            // Заполнение списка случайными напитками
             var rnd = new Random();
             for (int i = 0; i < 10; i++)
             {
@@ -60,12 +67,14 @@ namespace Lab4
             ShowQueue();
         }
 
+        // Отображение количества всех видов напитков на форме
         private void ShowInfo()
         {
             int juiceCount = 0;
             int sodaCount = 0;
             int alcoholCount = 0;
 
+            // Подсчет всех напитков
             foreach (var drink in this.drinksList)
             {
                 if (drink is Juice)
@@ -82,35 +91,38 @@ namespace Lab4
                 }
             }
 
+            // Формирование строки для отображения количества
             string counts = String.Format("{0}\t{1}\t\t{2}", juiceCount, sodaCount, alcoholCount);
 
-            // Очищаем текст
+            // Очистка текста
             txtInfo.Document.Blocks.Clear();
             infoParagraph.Inlines.Clear();
 
-            // Заполняем параграф новой информацией
+            // Заполнение параграфа новой информацией
             infoParagraph.Inlines.Add(new Bold(new Run("Сок\tГазировка\tАлкоголь\n")));
             infoParagraph.Inlines.Add(new Run(counts));
-            // Выводим параграфы в поле
+
+            // Вывод текста на форму
             txtInfo.Document.Blocks.Add(infoParagraph);
         }
 
+        // Получение следующего в очереди напитка
         private void btnGet_Click(object sender, RoutedEventArgs e)
         {
             outParagraph.Inlines.Clear();
 
-            if (drinksList.Count == 0) // Если список пуст
+            if (drinksList.Count == 0) // Если список   пуст
             {
                 outParagraph.Inlines.Add(new Run("Автомат пуст"));
                 txtOut.Document.Blocks.Add(outParagraph);
             }
             else
             {
-                // Берем первый элемент и удаляем его
+                // Сохрание ссылки на первогый элемент списка и удаление его
                 Drink drink = drinksList[0];
                 drinksList.RemoveAt(0);
 
-                // Выводим информацию в поле
+                // Вывод информации в поле
                 outParagraph.Inlines.Add(new Run(drink.GetInfo()));
                 txtOut.Document.Blocks.Add(outParagraph);
                 
@@ -119,6 +131,7 @@ namespace Lab4
             }
         }
 
+        // Отображение информации об очереди на форме
         public void ShowQueue()
         {
             queueParagraph.Inlines.Clear();
@@ -131,15 +144,18 @@ namespace Lab4
             {
                 foreach (var drink in drinksList)
                 {
+                    // Сохранение ссылки на изображение 
                     BitmapImage bitmap = new BitmapImage(new Uri(@"C:\Users\hodac\source\repos\Lab4\Lab4\" + drink.GetDrinkType() + ".jpg"));
                     Image image = new Image();
                     image.Source = bitmap;
                     image.Height = 20;
 
+                    // Сохранение изображения и текста в параграф
                     queueParagraph.Inlines.Add(image);
                     queueParagraph.Inlines.Add(new Run(drink.GetDrinkType() + "\n"));
                 }
             }
+            // Вывод параграфа на форму
             txtQueue.Document.Blocks.Add(queueParagraph);
         }
     }

@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 namespace Lab4
 {
     public class Drink {
-        public int volume;
+        public int volume; // Объем
         static protected int[] possibleVolumes = new int[] { 250, 500, 750, 1000, 1500, 2000 }; // Возможные объемы
+        static protected Random rnd = new Random(); // Переменная рандома для случайного заполнения полей объектов
 
         public virtual string GetInfo()
         {
@@ -22,13 +23,15 @@ namespace Lab4
         }
     }
 
+    // Варианты видов сока
     public enum JuiceType { apple, orange, cherry };
 
     public class Juice : Drink
     {
-        public JuiceType type = JuiceType.apple;
-        public bool withPulp = false;
+        public JuiceType type;
+        public bool withPulp;
 
+        // Геттер информации о соке
         public override string GetInfo()
         {
             string info = "Сок\n";
@@ -56,9 +59,9 @@ namespace Lab4
             return "Сок";
         }
 
+        // Создание экземпляра класса со случайными значениями полей
         public static Juice Generate()
         {
-            var rnd = new Random();
             return new Juice
             {
                 volume = Drink.possibleVolumes[rnd.Next(6)],
@@ -68,13 +71,15 @@ namespace Lab4
         }
     }
 
+    // Варианты видов газировки
     public enum SodaType { coke, fanta, sprite };
 
     public class Soda : Drink
     {
-        public SodaType type = SodaType.coke;
-        public int bubblesNumber = 0;
+        public SodaType type;
+        public int bubblesNumber;
 
+        // Геттер информации о газировке
         public override string GetInfo()
         {
             string info = "Газировка\n";
@@ -103,9 +108,9 @@ namespace Lab4
             return "Газировка";
         }
 
+        // Создание экземпляра класса со случайными значениями полей
         public static Soda Generate()
         {
-            var rnd = new Random();
             return new Soda
             {
                 volume = Drink.possibleVolumes[rnd.Next(6)],
@@ -115,13 +120,15 @@ namespace Lab4
         }
     }
 
+    // Варианты видов алкоголя
     public enum AlcoholType {beer, wine, cognac};
 
     public class Alcohol : Drink
     {
-        public float strength = 0;
-        public AlcoholType type = AlcoholType.beer;
+        public int strength;
+        public AlcoholType type;
 
+        // Геттер информации об алкоголе
         public override string GetInfo()
         {
             string info = "Алкоголь\n";
@@ -149,10 +156,10 @@ namespace Lab4
         {
             return "Алкоголь";
         }
-
+        
+        // Создание экземпляра класса со случайными значениями полей
         public static Alcohol Generate()
         {
-            var rnd = new Random();
             return new Alcohol
             {
                 volume = Drink.possibleVolumes[rnd.Next(6)],
